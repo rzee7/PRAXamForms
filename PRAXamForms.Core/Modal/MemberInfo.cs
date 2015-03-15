@@ -16,8 +16,8 @@ namespace PRAXamForms.Core
         public string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
         public string Title { get; set; }
         public string ProfileImage { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public DateTime DateOfJoining { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public DateTime? DateOfJoining { get; set; }
         public char Gender { get; set; }
         public string FacebookUrl { get; set; }
         public string LinkedInUrl { get; set; }

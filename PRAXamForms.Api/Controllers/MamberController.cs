@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PRAXamForms.Core;
+using PRAXamForms.Data.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,24 +12,25 @@ namespace PRAXamForms.Api.Controllers
     public class MamberController : ApiController
     {
         // GET api/mamber
-        public IEnumerable<string> Get()
+        public Response Get()
         {
-            return new string[] { "value1", "value2" };
+            return BLMemberInfo.Instance.GetMembers(-1); // -1 to get all members
         }
 
         // GET api/mamber/5
-        public string Get(int id)
+        public Response Get(int id)
         {
-            return "value";
+            return BLMemberInfo.Instance.GetMembers(id);
         }
 
         // POST api/mamber
-        public void Post([FromBody]string value)
+        public int Post([FromBody]MemberInfo _memberInfo)
         {
+            return BLMemberInfo.Instance.AddUpdateMember(_memberInfo);
         }
 
         // PUT api/mamber/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]MemberInfo value)
         {
         }
 

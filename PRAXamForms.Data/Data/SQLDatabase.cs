@@ -79,10 +79,10 @@ namespace PRAXamForms.Data
                                     tempMemberInfo.LastName = reader["LastName"].ToString().Trim();
                                     tempMemberInfo.Title = reader["Title"].ToString().Trim();
                                     tempMemberInfo.DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]);
-                                    tempMemberInfo.DateOfJoining = Convert.ToDateTime(reader["DateOfJoining "]);
+                                    tempMemberInfo.DateOfJoining = Convert.ToDateTime(reader["DateOfJoining"]);
                                     tempMemberInfo.ProfileImage = reader["ProfileImage"].ToString().Trim();
                                     tempMemberInfo.FacebookUrl = reader["FacebookUrl"].ToString().Trim();
-                                    tempMemberInfo.LinkedInUrl = reader["FacebookUrl"].ToString().Trim();
+                                    tempMemberInfo.LinkedInUrl = reader["LinkedInUrl"].ToString().Trim();
                                     tempMemberInfo.TwitterUrl = reader["TwitterUrl"].ToString().Trim();
                                     tempMemberInfo.Gender = Convert.ToChar(reader["Gender"]);
                                     memberInfoList.Add(tempMemberInfo);
@@ -99,7 +99,7 @@ namespace PRAXamForms.Data
         public int AddUpdateMemberInfo(MemberInfo memberInfo)
         {
             DbCommand sqlCommand = CreateCommand(SqlConstants.AddUpdateMemberInfo);
-            int _newUserID = 0;
+            int _newMemberID = 0;
             if (sqlCommand != null)
             {
                 using (DbConnection connection = (DbConnection)CreateConnection(_connectionString))
@@ -120,24 +120,23 @@ namespace PRAXamForms.Data
                             sqlCommand.Parameters.Add(new SqlParameter("@FacebookUrl", memberInfo.FacebookUrl));
                             sqlCommand.Parameters.Add(new SqlParameter("@LinkedInUrl", memberInfo.LinkedInUrl));
                             sqlCommand.Parameters.Add(new SqlParameter("@TwitterUrl", memberInfo.TwitterUrl));
-                            sqlCommand.Parameters.Add(new SqlParameter("@NewUserID", ParameterDirection.Output));
-                            sqlCommand.Parameters["@NewUserID"].Direction = ParameterDirection.Output;
+                            sqlCommand.Parameters.Add(new SqlParameter("@NewMemberID", ParameterDirection.Output));
+                            sqlCommand.Parameters["@NewMemberID"].Direction = ParameterDirection.Output;
 
                             if (connection.State != ConnectionState.Open)
                                 connection.Open();
 
                             sqlCommand.ExecuteNonQuery();
-                            _newUserID = Convert.ToInt32(sqlCommand.Parameters["@NewUserID"].Value);
-
+                            _newMemberID = Convert.ToInt32(sqlCommand.Parameters["@NewMemberID"].Value); //return New added member ID
                         }
                         catch (Exception ex)
                         {
-                            throw;
+                            return -1;
                         }
                     }
                 }
             }
-            return _newUserID;
+            return _newMemberID;
         }
 
         #endregion

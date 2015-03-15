@@ -10,7 +10,7 @@ namespace PRAXamForms.Data
         // new constants
         internal const string AddUpdateMemberInfo = "AddUpdateMemberInfo";
 
-        internal const string GetMemberInfo = "GetMemberInfo";
+        internal const string GetMemberInfo = "GetMembers";
 
         internal const string CheckUserAvailability = "CheckUserAvailability";
     }
