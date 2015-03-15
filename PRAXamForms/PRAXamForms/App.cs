@@ -11,7 +11,7 @@ namespace PRAXamForms
     {
         public App()
         {
-            
+            MainPage = new NavigationPage(new MemberListPage());
         }
 
         protected override void OnStart()

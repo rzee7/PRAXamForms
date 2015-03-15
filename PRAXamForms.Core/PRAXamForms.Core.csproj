@@ -37,6 +37,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\CollectionExtentions.cs" />
     <Compile Include="Modal\BaseModel.cs" />
     <Compile Include="Modal\MemberInfo.cs" />
     <Compile Include="Modal\UserInfo.cs" />
