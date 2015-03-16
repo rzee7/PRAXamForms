@@ -11,12 +11,22 @@ namespace PRAXamForms.Cell
     {
         public MemberCell()
         {
+            
             StackLayout viewLayout = new StackLayout
             {
-                Orientation = StackOrientation.Horizontal,
-                Children = { MemberImageView, CraeteLayout() }
+                Orientation = StackOrientation.Horizontal
+                //Children = { MemberImageView, CraeteLayout() }
             };
+            
+           
+            viewLayout.Children.Add(MemberImageView);
+            viewLayout.Children.Add(CraeteLayout());
             View = viewLayout;
+            
+            viewLayout.Children[0].Animate("", x =>
+            {
+                viewLayout.Children[0].TranslateTo(0, 0);
+            }, length: 500); //TranslateTo(100, 0, 250, Easing.SinIn);
         }
 
         static Image MemberImageView
@@ -25,11 +35,12 @@ namespace PRAXamForms.Cell
             {
                 Image image = new Image
                 {
-                    HorizontalOptions = LayoutOptions.Start
+                    HorizontalOptions = LayoutOptions.Start,
+                    TranslationX = App.ScreenSize.Width
                 };
                 image.SetBinding(Image.SourceProperty, new Binding("ProfileImage"));
                 image.WidthRequest = image.HeightRequest = 40;
-                image.TranslateTo(image.ParentView.Width, 0);
+
                 return image;
             }
         }
@@ -51,6 +62,7 @@ namespace PRAXamForms.Cell
             Label titleLabel = new Label
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
+                TranslationY=-5
             };
             titleLabel.SetBinding(Label.TextProperty, "Title");
 

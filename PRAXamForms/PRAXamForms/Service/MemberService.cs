@@ -76,15 +76,14 @@ namespace PRAXamForms.Service
             return returnResult;
         }
 
-        public static void GetDataAsync<T>(string endpoint, Action<ICollection<T>> callback)
+        public static void GetDataAsync(string endpoint, Action<Response> callback)
         {
-            PostData<ICollection<T>>(endpoint, HttpMethod.Get,
+            PostData<Response>(endpoint, HttpMethod.Get,
                 null).ContinueWith((completed) =>
                 {
                     if (!completed.IsFaulted)
                         callback(completed.Result);
-                    else
-                        callback(null);
+                   
                 }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }

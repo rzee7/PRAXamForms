@@ -15,7 +15,8 @@ namespace PRAXamForms.Droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
+            App.ScreenSize = new Xamarin.Forms.Size(Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density,
+    Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }

@@ -14,6 +14,8 @@ namespace PRAXamForms
             MainPage = new NavigationPage(new MemberListPage());
         }
 
+        public static Size ScreenSize { get; set; }
+
         protected override void OnStart()
         {
             // Handle when your app starts

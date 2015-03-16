@@ -24,7 +24,10 @@ namespace PRAXamForms.ViewModel
         private ObservableCollection<T> items;
         public ObservableCollection<T> Items
         {
-            get { return items; }
+            get 
+            {
+                return items; 
+            }
             set
             {
                 items.Clear();

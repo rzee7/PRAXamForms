@@ -13,11 +13,11 @@ namespace PRAXamForms.ViewModel
     {
         public MemberViewModel()
         {
-            MemberService.GetDataAsync<MemberInfo>(MemberService.MemberList, (members) =>
+            MemberService.GetDataAsync(MemberService.MemberList, (members) =>
             {
                 if (members != null)
-                    Items.Add(members);
-                MessagingCenter.Send<ICollection<MemberInfo>>(members, "MembersRecieved");
+                    Items.Add(members.Members);
+                //MessagingCenter.Send<ICollection<MemberInfo>>(members, "MembersRecieved");
             });
 
             SelectionChangedCommand = new Command(async () =>

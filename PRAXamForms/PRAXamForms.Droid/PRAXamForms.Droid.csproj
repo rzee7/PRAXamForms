@@ -87,6 +87,7 @@
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\drawable\riyaz.png" />
+    <AndroidResource Include="Resources\drawable\prabh.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PRAXamForms\PRAXamForms.csproj">
