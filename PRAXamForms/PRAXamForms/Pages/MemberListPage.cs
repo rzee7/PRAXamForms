@@ -11,16 +11,22 @@ namespace PRAXamForms
 {
     public class MemberListPage : ContentPage
     {
+        #region View Model
         public MemberViewModel ViewModel { get { return BindingContext as MemberViewModel; } }
+        
+        #endregion
+
+        #region Constructor
+
         public MemberListPage()
         {
-
             BindingContext = new MemberViewModel();
-
             var list = new ListView();
             list.ItemTemplate = new DataTemplate(typeof(MemberCell));
             list.ItemsSource = ViewModel.Items;
             Content = list;
         }
+
+        #endregion
     }
 }

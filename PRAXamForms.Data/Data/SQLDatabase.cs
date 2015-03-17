@@ -139,6 +139,50 @@ namespace PRAXamForms.Data
             return _newMemberID;
         }
 
+        public MemberInfo CheckLogin(UserInfo _userInfo) // If ID < 0 "Select All Member" else Single Member
+        {
+            MemberInfo tempMemberInfo = null;
+
+            DbCommand sqlCommand = CreateCommand(SqlConstants.CheckLogin);
+            if (sqlCommand != null)
+            {
+                using (DbConnection connection = (DbConnection)CreateConnection(_connectionString))
+                {
+                    if (connection != null)
+                    {
+                        sqlCommand.Connection = connection;
+
+                        if (connection.State != ConnectionState.Open)
+                            connection.Open();
+                        sqlCommand.Parameters.Add(new SqlParameter("@UserName", _userInfo.UserName));
+                        sqlCommand.Parameters.Add(new SqlParameter("@Password", _userInfo.Password));
+                        DbDataReader reader = sqlCommand.ExecuteReader();
+                        if (reader != null)
+                        {
+                            if (reader.HasRows)
+                            {
+                                tempMemberInfo = new MemberInfo();
+                                tempMemberInfo.ID = (int)reader["ID"];
+                                tempMemberInfo.FirstName = reader["FirstName"].ToString().Trim();
+                                tempMemberInfo.LastName = reader["LastName"].ToString().Trim();
+                                tempMemberInfo.Title = reader["Title"].ToString().Trim();
+                                tempMemberInfo.DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]);
+                                tempMemberInfo.DateOfJoining = Convert.ToDateTime(reader["DateOfJoining"]);
+                                tempMemberInfo.ProfileImage = reader["ProfileImage"].ToString().Trim();
+                                tempMemberInfo.FacebookUrl = reader["FacebookUrl"].ToString().Trim();
+                                tempMemberInfo.LinkedInUrl = reader["LinkedInUrl"].ToString().Trim();
+                                tempMemberInfo.TwitterUrl = reader["TwitterUrl"].ToString().Trim();
+                                tempMemberInfo.Gender = Convert.ToChar(reader["Gender"]);
+                            }
+                        }
+                    }
+                }
+                return tempMemberInfo;
+            }
+            return null;
+        }
+
+
         #endregion
     }
 }

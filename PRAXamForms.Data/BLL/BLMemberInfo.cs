@@ -72,5 +72,24 @@ namespace PRAXamForms.Data.BLL
         }
 
         #endregion
+
+        #region Check Login
+
+        public Response CheckLogin(UserInfo _userInfo)
+        {
+            try
+            {
+                var resData = new Response();
+                var res = sqlDatabase.CheckLogin(_userInfo);
+                resData.Members.Add(res);
+                return resData;
+            }
+            catch (Exception ex)
+            {
+                return new Response { Error = ex.Message };
+            }
+        }
+
+        #endregion
     }
 }

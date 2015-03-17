@@ -9,25 +9,37 @@ namespace PRAXamForms.Cell
 {
     public class MemberCell : ViewCell
     {
+        #region Constructor
+
         public MemberCell()
         {
-            
+            #region View Layout
+
             StackLayout viewLayout = new StackLayout
             {
-                Orientation = StackOrientation.Horizontal
-                //Children = { MemberImageView, CraeteLayout() }
+                BackgroundColor = Color.Gray,
+                Orientation = StackOrientation.Horizontal,
+                Children = { MemberImageView, CellLayout() }
             };
-            
-           
-            viewLayout.Children.Add(MemberImageView);
-            viewLayout.Children.Add(CraeteLayout());
+
             View = viewLayout;
-            
-            viewLayout.Children[0].Animate("", x =>
-            {
-                viewLayout.Children[0].TranslateTo(0, 0);
-            }, length: 500); //TranslateTo(100, 0, 250, Easing.SinIn);
+            viewLayout.Children[0].LayoutTo(new Rectangle(0, 0, 40, 40), 2500, Easing.BounceIn);
+
+            #endregion
+
+            #region Another Way to Animate View
+
+            //viewLayout.Children[0].Animate("", x =>
+            //{
+            //    viewLayout.Children[0].TranslateTo(0, 0);
+            //}, length: 500);
+
+            #endregion
         }
+
+        #endregion
+
+        #region Image Cell
 
         static Image MemberImageView
         {
@@ -35,23 +47,25 @@ namespace PRAXamForms.Cell
             {
                 Image image = new Image
                 {
-                    HorizontalOptions = LayoutOptions.Start,
-                    TranslationX = App.ScreenSize.Width
+                    HorizontalOptions = LayoutOptions.Start
                 };
                 image.SetBinding(Image.SourceProperty, new Binding("ProfileImage"));
                 image.WidthRequest = image.HeightRequest = 40;
-
                 return image;
             }
         }
 
-        StackLayout CraeteLayout()
+        #endregion
+
+        #region Image Layout
+
+        StackLayout CellLayout()
         {
             #region Label for name
 
             Label nameLabel = new Label
             {
-                HorizontalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand
             };
             nameLabel.SetBinding(Label.TextProperty, "FullName");
 
@@ -62,7 +76,7 @@ namespace PRAXamForms.Cell
             Label titleLabel = new Label
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                TranslationY=-5
+                TranslationY = -5
             };
             titleLabel.SetBinding(Label.TextProperty, "Title");
 
@@ -81,5 +95,7 @@ namespace PRAXamForms.Cell
 
             return memberLayout;
         }
+
+        #endregion
     }
 }

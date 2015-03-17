@@ -15,13 +15,14 @@ namespace PRAXamForms.Service
         public const String HosetName = "http://192.168.1.11:4040/api/";
         public const String MemberList = "Member";
         public const String MemberDetails = "Member/{0}";
+        public const String Login = "Login";
 #else
         private const String HOST_NAME = "https://rest-xamarinambassador.azurewebsites.net/api";
         private const String ALL_AMBASSADORS = "/values/";
         private const String DETA_AMBASSADOR = "/values/{0}";
 #endif
-        private static async Task<T> PostData<T>(string endpoint, HttpMethod method,
-            IEnumerable<KeyValuePair<string, string>> content = null) where T : class
+        public static async Task<T> PostData<T, Tr>(string endpoint, HttpMethod method,
+            Tr content) where T : class
         {
             T returnResult = null;
 
@@ -36,9 +37,9 @@ namespace PRAXamForms.Service
 
                 HttpResponseMessage result = null;
 
-                FormUrlEncodedContent data = null;
+                StringContent data = null;
                 if (content != null)
-                    data = new FormUrlEncodedContent(content);
+                    data = new StringContent(JsonConvert.SerializeObject(content));
 
                 if (method == HttpMethod.Get)
                     result = await client.GetAsync(endpoint);
@@ -78,12 +79,11 @@ namespace PRAXamForms.Service
 
         public static void GetDataAsync(string endpoint, Action<Response> callback)
         {
-            PostData<Response>(endpoint, HttpMethod.Get,
+            PostData<Response,object>(endpoint, HttpMethod.Get,
                 null).ContinueWith((completed) =>
                 {
                     if (!completed.IsFaulted)
                         callback(completed.Result);
-                   
                 }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }

@@ -12,6 +12,8 @@ namespace PRAXamForms.Data
 
         internal const string GetMemberInfo = "GetMembers";
 
+        internal const string CheckLogin = "CheckLogin";
+
         internal const string CheckUserAvailability = "CheckUserAvailability";
     }
 }

@@ -36,12 +36,17 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Cell\MemberCell.cs" />
+    <Compile Include="Helper\ObjectToDictinaryHelper.cs" />
+    <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\MemberDetails.cs" />
     <Compile Include="Pages\MemberListPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\MemberService.cs" />
+    <Compile Include="Triggers\EmailValidationTrigger.cs" />
+    <Compile Include="Triggers\EmptyTextValidation.cs" />
     <Compile Include="ViewModel\BaseListViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MemberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
