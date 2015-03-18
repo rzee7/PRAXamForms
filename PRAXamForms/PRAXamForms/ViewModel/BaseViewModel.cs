@@ -20,7 +20,7 @@ namespace PRAXamForms.ViewModel
                 var mainPage = Application.Current.MainPage;
                 if (mainPage is NavigationPage)
                 {
-                    return (INavigation)mainPage;
+                    return (INavigation)mainPage.Navigation;
                 }
                 return Application.Current.MainPage.Navigation;
             }

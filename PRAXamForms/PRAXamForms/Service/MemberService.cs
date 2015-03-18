@@ -12,10 +12,10 @@ namespace PRAXamForms.Service
     public static class MemberService
     {
 #if DEBUG
-        public const String HosetName = "http://192.168.1.11:4040/api/";
-        public const String MemberList = "Member";
-        public const String MemberDetails = "Member/{0}";
-        public const String Login = "Login";
+        public const string HostName = "http://192.168.1.11:4040/api/";
+        public const string MemberList = "Member";
+        public const string MemberDetails = "Member/{0}";
+        public const string Login = "Login";
 #else
         private const String HOST_NAME = "https://rest-xamarinambassador.azurewebsites.net/api";
         private const String ALL_AMBASSADORS = "/values/";
@@ -30,7 +30,7 @@ namespace PRAXamForms.Service
             try
             {
                 client = new HttpClient();
-                client.BaseAddress = new Uri(HosetName);
+                client.BaseAddress = new Uri(HostName);
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
 
                 client.Timeout = new TimeSpan(0, 0, 15);
@@ -39,7 +39,7 @@ namespace PRAXamForms.Service
 
                 StringContent data = null;
                 if (content != null)
-                    data = new StringContent(JsonConvert.SerializeObject(content));
+                    data = new StringContent(JsonConvert.SerializeObject(content), UTF8Encoding.UTF8, "application/json");
 
                 if (method == HttpMethod.Get)
                     result = await client.GetAsync(endpoint);

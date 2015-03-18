@@ -14,7 +14,7 @@ namespace PRAXamForms.Core
         public string LastName { get; set; }
         //[Ignore] for local DB
         //[Ignore]
-        public string FullName { get; set; }//get { return string.Format("{0} {1}", FirstName, LastName); } }
+        public string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
         public string Title { get; set; }
         public string ProfileImage { get; set; }
         public DateTime? DateOfBirth { get; set; }

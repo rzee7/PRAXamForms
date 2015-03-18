@@ -13,7 +13,7 @@ namespace PRAXamForms
         protected override void Invoke(Entry sender)
         {
             bool isValid = IsEmailValid(sender.Text);
-            sender.BackgroundColor = isValid ? Color.Default : Color.Red;
+            sender.TextColor = isValid ? Color.Default : Color.Red;
         }
 
         bool IsEmailValid(string email)

@@ -17,7 +17,7 @@ namespace PRAXamForms.Cell
 
             StackLayout viewLayout = new StackLayout
             {
-                BackgroundColor = Color.Gray,
+               // BackgroundColor = Color.Gray,
                 Orientation = StackOrientation.Horizontal,
                 Children = { MemberImageView, CellLayout() }
             };

@@ -12,9 +12,9 @@ namespace PRAXamForms.Api.Controllers
     public class LoginController : ApiController
     {
         // GET api/login
-        public IEnumerable<string> Get()
+        public Response Get()
         {
-            return new string[] { "value1", "value2" };
+            return null;//BLMemberInfo.Instance.CheckLogin(new UserInfo { UserName = "rzee.m7@gmail.com", Password = "admin" });
         }
 
         // GET api/login/5

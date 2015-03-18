@@ -17,7 +17,6 @@ namespace PRAXamForms.ViewModel
             {
                 if (members != null)
                     Items.Add(members.Members);
-                //MessagingCenter.Send<ICollection<MemberInfo>>(members, "MembersRecieved");
             });
 
             SelectionChangedCommand = new Command(async () =>

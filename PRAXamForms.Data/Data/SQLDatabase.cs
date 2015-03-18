@@ -161,6 +161,7 @@ namespace PRAXamForms.Data
                         {
                             if (reader.HasRows)
                             {
+                                reader.Read();
                                 tempMemberInfo = new MemberInfo();
                                 tempMemberInfo.ID = (int)reader["ID"];
                                 tempMemberInfo.FirstName = reader["FirstName"].ToString().Trim();

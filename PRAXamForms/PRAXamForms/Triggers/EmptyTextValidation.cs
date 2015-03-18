@@ -11,7 +11,7 @@ namespace PRAXamForms
     {
         protected override void Invoke(Entry sender)
         {
-            sender.BackgroundColor = sender.Text.Length > 0 ? Color.Default : Color.Red;
+            sender.TextColor = sender.Text.Length > 0 ? Color.Default : Color.Red;
         }
     }
 }

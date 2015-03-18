@@ -13,7 +13,7 @@ namespace PRAXamForms
 
         #region View Model
 
-        public LoginViewModel ViewModel { get { return BindingContext as LoginViewModel; } }
+        public LoginViewModel ViewModel { get; set; }
 
         #endregion
 
@@ -21,7 +21,10 @@ namespace PRAXamForms
 
         public LoginPage()
         {
+
             #region Binding Context
+
+            ViewModel = new LoginViewModel();
 
             BindingContext = ViewModel.UserModel;
 
@@ -31,11 +34,11 @@ namespace PRAXamForms
 
             Padding = new Thickness(20);
             Title = "Login";
-            BindingContext = null;
 
             #endregion
 
             #region Using Triggers
+
             var emailValTrig = new EventTrigger();
             emailValTrig.Event = "TextChanged";
             emailValTrig.Actions.Add(new EmailValidationTrigger());
@@ -66,9 +69,10 @@ namespace PRAXamForms
                 Text = "Login",
                 BorderRadius = 5,
                 TextColor = Color.White,
-                BackgroundColor = Color.Gray
+                BackgroundColor = Color.Gray,
+                Command = ViewModel.SelectionChangedCommand
             };
-            loginButton.SetBinding(BackgroundColorProperty, new Binding("LoginButtonColour"));
+           // loginButton.SetBinding(BackgroundColorProperty, new Binding("LoginButtonColour"));
 
             var dataTrigger = new DataTrigger(typeof(Button));
             dataTrigger.Binding = new Binding("Text.Length", BindingMode.Default, source: loginInput);

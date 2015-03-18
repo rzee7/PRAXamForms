@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace PRAXamForms.ViewModel
 {
@@ -13,11 +14,18 @@ namespace PRAXamForms.ViewModel
     {
         public LoginViewModel()
         {
-            MemberService.PostData<Response, UserInfo>(MemberService.Login, HttpMethod.Post, UserModel).ContinueWith(t =>
+            UserModel = new UserInfo();
+
+            SelectionChangedCommand = new Command(async () =>
             {
-                if (t.Result != null && t.Result.Members != null)
-                    MemberData = t.Result.Members[0];
-            }); ;
+                await MemberService.PostData<Response, UserInfo>(MemberService.Login, HttpMethod.Post, UserModel).ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        Navigation.PushAsync(new ProfilePage(t.Result.Members[0]),true);
+                    }
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            });
         }
 
         private UserInfo _userModel;
@@ -28,12 +36,5 @@ namespace PRAXamForms.ViewModel
             set { _userModel = value; OnPropertyChanged("UserModel"); }
         }
 
-        private MemberInfo _memberData;
-
-        public MemberInfo MemberData
-        {
-            get { return _memberData; }
-            set { _memberData = value; OnPropertyChanged("MemberData"); }
-        }
     }
 }
