@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using xBrainLab.Security.Cryptography;
 
 namespace PRAXamForms.Core
 {
     public class MemberInfo : BaseModel
     {
+        public MemberInfo()
+        {
+            User = new UserInfo();
+        }
+
         #region Properties
 
         public string FirstName { get; set; }
@@ -24,6 +30,62 @@ namespace PRAXamForms.Core
         public string LinkedInUrl { get; set; }
         public string TwitterUrl { get; set; }
         public int UserID { get; set; }
+
+        public UserInfo User { get; set; }
+
+        private string gravitar;
+        public string Gravitar
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(gravitar))
+                {
+                    gravitar = GenerateGravitarLink(User.UserName);
+                }
+                return gravitar;
+            }
+        }
+
+        private string gravitarLarge;
+        public string GravitarLarge
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ProfileImage))
+                {
+                    gravitarLarge = GenerateGravitarLink(User.UserName, 150);
+                }
+                return gravitarLarge;
+            }
+        }
+
+        #endregion
+
+        #region Gravitar
+
+        public static string GenerateGravitarLink(string email, int size = -1)
+        {
+            email = email.Trim().ToLower();
+            var hash = MD5.GetHashString(email);
+            var gravitar = string.Empty;
+
+            if (size > 0)
+            {
+                //show to size
+                gravitar = string.Format("{0}{1}?s={2}",
+                    "http://www.gravatar.com/avatar/",
+                    hash.ToLower(), size);
+            }
+            else
+            {
+                gravitar = string.Format("{0}{1}",
+                    "http://www.gravatar.com/avatar/",
+                    hash.ToLower());
+            }
+
+            return gravitar;
+        }
+
         #endregion
     }
 }

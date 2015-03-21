@@ -12,9 +12,9 @@ namespace PRAXamForms.Api.Controllers
     public class LoginController : ApiController
     {
         // GET api/login
-        public Response Get()
+        public bool Get()
         {
-            return null;//BLMemberInfo.Instance.CheckLogin(new UserInfo { UserName = "rzee.m7@gmail.com", Password = "admin" });
+            return false; //BLMemberInfo.Instance.CheckUserAvailability("rzee.m7@gmail.com"); // return null;//BLMemberInfo.Instance.CheckLogin(new UserInfo { UserName = "rzee.m7@gmail.com", Password = "admin" });
         }
 
         // GET api/login/5
@@ -30,8 +30,9 @@ namespace PRAXamForms.Api.Controllers
         }
 
         // PUT api/login/5
-        public void Put(int id, [FromBody]string value)
+        public bool Put(int id, [FromBody]string _userName)
         {
+            return BLMemberInfo.Instance.CheckUserAvailability(_userName);
         }
 
         // DELETE api/login/5

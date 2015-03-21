@@ -11,20 +11,16 @@ namespace PRAXamForms.Service
 {
     public static class MemberService
     {
-#if DEBUG
         public const string HostName = "http://192.168.1.11:4040/api/";
         public const string MemberList = "Member";
         public const string MemberDetails = "Member/{0}";
         public const string Login = "Login";
-#else
-        private const String HOST_NAME = "https://rest-xamarinambassador.azurewebsites.net/api";
-        private const String ALL_AMBASSADORS = "/values/";
-        private const String DETA_AMBASSADOR = "/values/{0}";
-#endif
+        public const string UserAvailabale = "Login/1";
+
         public static async Task<T> PostData<T, Tr>(string endpoint, HttpMethod method,
-            Tr content) where T : class
+            Tr content)
         {
-            T returnResult = null;
+            T returnResult=default(T);
 
             HttpClient client = null;
             try
@@ -79,7 +75,7 @@ namespace PRAXamForms.Service
 
         public static void GetDataAsync(string endpoint, Action<Response> callback)
         {
-            PostData<Response,object>(endpoint, HttpMethod.Get,
+            PostData<Response, object>(endpoint, HttpMethod.Get,
                 null).ContinueWith((completed) =>
                 {
                     if (!completed.IsFaulted)

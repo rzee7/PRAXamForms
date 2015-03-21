@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\PRALabelRenderer.cs" />
+    <Compile Include="Renderers\PRATextBoxRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -106,6 +107,7 @@
     <AndroidResource Include="Resources\drawable\fbIcon.png" />
     <AndroidResource Include="Resources\drawable\twtIcon.png" />
     <AndroidResource Include="Resources\drawable\lkIcon.png" />
+    <AndroidResource Include="Resources\drawable\PRATextBox.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PRAXamForms\PRAXamForms.csproj">

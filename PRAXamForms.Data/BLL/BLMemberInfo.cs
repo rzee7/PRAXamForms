@@ -91,5 +91,21 @@ namespace PRAXamForms.Data.BLL
         }
 
         #endregion
+
+        #region Check Login
+
+        public bool CheckUserAvailability(string _userName)
+        {
+            try
+            {
+                return sqlDatabase.CheckUserAvailability(_userName);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        #endregion
     }
 }

@@ -63,10 +63,13 @@ namespace PRAXamForms.Droid
 			public const int prabh = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int riyaz = 2130837510;
+			public const int PRATextBox = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int twtIcon = 2130837511;
+			public const int riyaz = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int twtIcon = 2130837512;
 			
 			static Drawable()
 			{

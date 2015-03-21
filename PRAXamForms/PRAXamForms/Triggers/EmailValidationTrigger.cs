@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PRAXamForms.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,8 @@ namespace PRAXamForms
     {
         protected override void Invoke(Entry sender)
         {
-            bool isValid = IsEmailValid(sender.Text);
+            bool isValid = UserInfo.IsEmailValid(sender.Text);
             sender.TextColor = isValid ? Color.Default : Color.Red;
-        }
-
-        bool IsEmailValid(string email)
-        {
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            Match match = regex.Match(email);
-            return match.Success;
         }
     }
 }

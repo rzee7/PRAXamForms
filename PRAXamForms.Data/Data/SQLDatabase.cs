@@ -19,7 +19,7 @@ namespace PRAXamForms.Data
     public sealed class SqlDatabase : Database
     {
         #region ConnectionString & Stuff
-        
+
         private SqlConnection sqlConnection = null;
         public SqlDatabase(string connectionString)
             : base(connectionString)
@@ -63,7 +63,7 @@ namespace PRAXamForms.Data
 
                         if (connection.State != ConnectionState.Open)
                             connection.Open();
-                        sqlCommand.Parameters.Add(new SqlParameter("@ID",ID));
+                        sqlCommand.Parameters.Add(new SqlParameter("@ID", ID));
                         DbDataReader reader = sqlCommand.ExecuteReader();
                         if (reader != null)
                         {
@@ -139,7 +139,7 @@ namespace PRAXamForms.Data
             return _newMemberID;
         }
 
-        public MemberInfo CheckLogin(UserInfo _userInfo) // If ID < 0 "Select All Member" else Single Member
+        public MemberInfo CheckLogin(UserInfo _userInfo)
         {
             MemberInfo tempMemberInfo = null;
 
@@ -183,6 +183,34 @@ namespace PRAXamForms.Data
             return null;
         }
 
+        public bool CheckUserAvailability(string _userName)
+        {
+            bool isExist = false;
+            DbCommand sqlCommand = CreateCommand(SqlConstants.CheckUserAvailability);
+            if (sqlCommand != null)
+            {
+                using (DbConnection connection = (DbConnection)CreateConnection(_connectionString))
+                {
+                    if (connection != null)
+                    {
+                        sqlCommand.Connection = connection;
+
+                        if (connection.State != ConnectionState.Open)
+                            connection.Open();
+                        sqlCommand.Parameters.Add(new SqlParameter("@UserEmail", _userName));
+                        sqlCommand.Parameters.Add(new SqlParameter("@OutStatus", ParameterDirection.Output));
+                        sqlCommand.Parameters["@OutStatus"].Direction = ParameterDirection.Output;
+
+                        if (connection.State != ConnectionState.Open)
+                            connection.Open();
+
+                        sqlCommand.ExecuteNonQuery();
+                        isExist = Convert.ToBoolean(sqlCommand.Parameters["@OutStatus"].Value);
+                    }
+                }
+            }
+            return isExist;
+        }
 
         #endregion
     }
