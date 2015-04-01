@@ -24,14 +24,15 @@ namespace PRAXamForms.Api.Controllers
         }
 
         // POST api/mamber
-        public int Post([FromBody]MemberInfo _memberInfo)
+        public int Post([FromBody]UserInfo _userInfo)
         {
-            return BLMemberInfo.Instance.AddUpdateMember(_memberInfo);
+            return BLMemberInfo.Instance.RegisterUser(_userInfo);
         }
 
         // PUT api/mamber/5
-        public void Put(int id, [FromBody]MemberInfo value)
+        public int Put(int id, [FromBody]MemberInfo _memberInfo)
         {
+            return BLMemberInfo.Instance.AddUpdateMember(_memberInfo);
         }
 
         // DELETE api/mamber/5

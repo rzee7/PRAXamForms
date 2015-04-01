@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace PRAXamForms.ViewModel
@@ -22,7 +23,7 @@ namespace PRAXamForms.ViewModel
                 {
                     if (!t.IsFaulted)
                     {
-                        Navigation.PushAsync(new ProfilePage(t.Result.Members[0]),true);
+                        Navigation.PushAsync(new ProfilePage(t.Result.Members[0]), true);
                     }
                 }, TaskScheduler.FromCurrentSynchronizationContext());
             });
@@ -36,5 +37,26 @@ namespace PRAXamForms.ViewModel
             set { _userModel = value; OnPropertyChanged("UserModel"); }
         }
 
+        #region Register Command
+
+        private ICommand _registerCommand;
+
+        public ICommand RegisterCommand
+        {
+            get { return _registerCommand ?? (_registerCommand = new Command(async (param) => { await ExecuteRegisterUser(); })); }
+        }
+
+        private async Task ExecuteRegisterUser()
+        {
+            await MemberService.PostData<int, UserInfo>(MemberService.MemberList, HttpMethod.Post, UserModel).ContinueWith(t =>
+            {
+                if (!t.IsFaulted && t.Result > 0)
+                {
+                    Navigation.PushAsync(new DashboardPage() { BindingContext = UserModel }, true);
+                }
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        #endregion
     }
 }

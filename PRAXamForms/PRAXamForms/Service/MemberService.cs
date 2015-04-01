@@ -11,7 +11,7 @@ namespace PRAXamForms.Service
 {
     public static class MemberService
     {
-        public const string HostName = "http://192.168.1.11:4040/api/";
+        public const string HostName ="http://192.168.1.2:4040/api/";
         public const string MemberList = "Member";
         public const string MemberDetails = "Member/{0}";
         public const string Login = "Login";

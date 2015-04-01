@@ -107,5 +107,26 @@ namespace PRAXamForms.Data.BLL
         }
 
         #endregion
+
+        #region Register Member
+
+        public int RegisterUser(UserInfo _userInfo)
+        {
+            try
+            {
+                return sqlDatabase.RegisterUser(_userInfo);
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+        #endregion
+
+        public void GetReg()
+        {
+
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,7 @@ namespace PRAXamForms.Core
         public string TwitterUrl { get; set; }
         public int UserID { get; set; }
 
+        [JsonIgnore]
         public UserInfo User { get; set; }
 
         private string gravitar;
@@ -38,7 +40,7 @@ namespace PRAXamForms.Core
         {
             get
             {
-                if (string.IsNullOrEmpty(gravitar))
+                if (string.IsNullOrEmpty(gravitar) && UserID > 100)
                 {
                     gravitar = GenerateGravitarLink(User.UserName);
                 }

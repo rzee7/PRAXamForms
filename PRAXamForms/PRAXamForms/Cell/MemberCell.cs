@@ -14,10 +14,10 @@ namespace PRAXamForms.Cell
         public MemberCell()
         {
             #region View Layout
-
+            
             StackLayout viewLayout = new StackLayout
             {
-               // BackgroundColor = Color.Gray,
+                BackgroundColor = Color.Transparent,
                 Orientation = StackOrientation.Horizontal,
                 Children = { MemberImageView, CellLayout() }
             };

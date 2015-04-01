@@ -11,7 +11,7 @@ namespace PRAXamForms
     {
         public App()
         {
-            MainPage = new NavigationPage(new RegisterPage());
+            MainPage = new NavigationPage(new MemberListPage());
         }
 
         public static Size ScreenSize { get; set; }

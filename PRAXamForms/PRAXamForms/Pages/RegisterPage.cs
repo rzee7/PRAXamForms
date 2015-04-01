@@ -12,7 +12,6 @@ namespace PRAXamForms
 {
     public class RegisterPage : ContentPage
     {
-
         #region ViewModel
 
         public LoginViewModel ViewModel { get { return BindingContext as LoginViewModel; } }
@@ -41,11 +40,20 @@ namespace PRAXamForms
 
             var praTextBox = CreateEntryFor("Email", "UserModel.UserName");
             praTextBox.Triggers.Add(userExist);
+
+            var registerButton = new Button
+            {
+                Text = "Join",
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                Command = ViewModel.RegisterCommand
+            };
+
             var mainLayout = new StackLayout
             {
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 Padding = new Thickness(15, 0, 15, 0),
-                Children = { profileImage, praTextBox, CreateEntryFor("Passowrd", "UserModel.Password",true)
+                Children = { profileImage, praTextBox, CreateEntryFor("Passowrd", "UserModel.Password",true),
+                    registerButton
                 }
             };
             Content = mainLayout;

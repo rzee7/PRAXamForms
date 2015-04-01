@@ -14,7 +14,9 @@ namespace PRAXamForms.Api.Controllers
         // GET api/login
         public bool Get()
         {
-            return false; //BLMemberInfo.Instance.CheckUserAvailability("rzee.m7@gmail.com"); // return null;//BLMemberInfo.Instance.CheckLogin(new UserInfo { UserName = "rzee.m7@gmail.com", Password = "admin" });
+
+            //return BLMemberInfo.Instance.RegisterUser(new UserInfo { UserName = "test1", Password = "test1", IsActive = true, ProfileImage = "No Profile" });
+           return false; //BLMemberInfo.Instance.CheckUserAvailability("rzee.m7@gmail.com"); // return null;//BLMemberInfo.Instance.CheckLogin(new UserInfo { UserName = "rzee.m7@gmail.com", Password = "admin" });
         }
 
         // GET api/login/5

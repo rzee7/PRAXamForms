@@ -39,6 +39,7 @@
     <Compile Include="Controls\PRALabel.cs" />
     <Compile Include="Controls\PRATextBox.cs" />
     <Compile Include="Helper\ObjectToDictinaryHelper.cs" />
+    <Compile Include="Pages\DashboardPage.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\MemberDetails.cs" />
     <Compile Include="Pages\MemberListPage.cs" />

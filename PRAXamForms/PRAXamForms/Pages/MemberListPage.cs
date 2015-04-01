@@ -20,11 +20,18 @@ namespace PRAXamForms
 
         public MemberListPage()
         {
+            BackgroundImage = "backImage";
             BindingContext = new MemberViewModel();
-            var list = new ListView();
+            var list = new ListView() { BackgroundColor = Color.Transparent };
             list.ItemTemplate = new DataTemplate(typeof(MemberCell));
             list.ItemsSource = ViewModel.Items;
+            list.ItemSelected += list_ItemSelected;
             Content = list;
+        }
+
+        void list_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            
         }
 
         #endregion

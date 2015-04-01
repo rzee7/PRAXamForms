@@ -18,7 +18,7 @@ namespace PRAXamForms.Core
             set
             {
                 _userName = value; OnPropertyChanged("UserName");
-                if (IsEmailValid(_userName))
+                if (IsEmailValid(_userName) && Password.Length > 15)
                 {
                     ProfileImage = MemberInfo.GenerateGravitarLink(UserName);
                 }

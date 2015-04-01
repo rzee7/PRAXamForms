@@ -69,6 +69,8 @@ namespace PRAXamForms.Data
                         {
                             if (reader.HasRows)
                             {
+                                
+
                                 MemberInfo tempMemberInfo = null;
                                 memberInfoList = new Collection<MemberInfo>();
                                 while (reader.Read()) //Reading data from sql data reader
@@ -210,6 +212,40 @@ namespace PRAXamForms.Data
                 }
             }
             return isExist;
+        }
+
+        public int RegisterUser(UserInfo userInfo)
+        {
+            DbCommand sqlCommand = CreateCommand(SqlConstants.RegisterUser);
+            int _newMemberID = 0;
+            if (sqlCommand != null)
+            {
+                using (DbConnection connection = (DbConnection)CreateConnection(_connectionString))
+                {
+                    if (connection != null)
+                    {
+                        sqlCommand.Connection = connection;
+                        try
+                        {
+                            sqlCommand.Parameters.Add(new SqlParameter("@UserName", userInfo.UserName.Trim()));
+                            sqlCommand.Parameters.Add(new SqlParameter("@Password", userInfo.Password.Trim()));
+                            sqlCommand.Parameters.Add(new SqlParameter("@NewMemberID", ParameterDirection.Output));
+                            sqlCommand.Parameters["@NewMemberID"].Direction = ParameterDirection.Output;
+
+                            if (connection.State != ConnectionState.Open)
+                                connection.Open();
+
+                            sqlCommand.ExecuteNonQuery();
+                            _newMemberID = Convert.ToInt32(sqlCommand.Parameters["@NewMemberID"].Value); //return New added member ID
+                        }
+                        catch (Exception ex)
+                        {
+                            return -1;
+                        }
+                    }
+                }
+            }
+            return _newMemberID;
         }
 
         #endregion
