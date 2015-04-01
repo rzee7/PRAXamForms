@@ -7,7 +7,11 @@ using Xamarin.Forms;
 
 namespace PRAXamForms
 {
-    public class MemberDetails : ContentPage
+    public class MemberDetails : ProfilePage
     {
+        public MemberDetails()
+        {
+
+        }
     }
 }

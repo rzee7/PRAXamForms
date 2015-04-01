@@ -13,11 +13,9 @@ namespace PRAXamForms
     {
         #region Constructor
 
-        public ProfilePage(MemberInfo info)
+        public ProfilePage(MemberInfo info=null)
         {
             #region  Main View
-
-            BindingContext = info;
 
             BackgroundImage = "backImage";
             RelativeLayout MainView = new RelativeLayout

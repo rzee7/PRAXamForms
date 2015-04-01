@@ -1,4 +1,5 @@
 ﻿using PRAXamForms.Cell;
+using PRAXamForms.Core;
 using PRAXamForms.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace PRAXamForms
 
         void list_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            
+            ViewModel.SelectedItem = e.SelectedItem as MemberInfo;
         }
 
         #endregion

@@ -23,7 +23,7 @@ namespace PRAXamForms.ViewModel
                 {
                     if (!t.IsFaulted)
                     {
-                        Navigation.PushAsync(new ProfilePage(t.Result.Members[0]), true);
+                        Navigation.PushAsync(new ProfilePage() { BindingContext = t.Result.Members[0] }, true);
                     }
                 }, TaskScheduler.FromCurrentSynchronizationContext());
             });
