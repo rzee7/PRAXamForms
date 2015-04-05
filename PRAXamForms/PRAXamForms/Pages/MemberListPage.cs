@@ -10,31 +10,32 @@ using Xamarin.Forms;
 
 namespace PRAXamForms
 {
-    public class MemberListPage : ContentPage
-    {
-        #region View Model
-        public MemberViewModel ViewModel { get { return BindingContext as MemberViewModel; } }
-        
-        #endregion
+	public class MemberListPage : ContentPage
+	{
+		#region View Model
 
-        #region Constructor
+		public MemberViewModel ViewModel { get { return BindingContext as MemberViewModel; } }
 
-        public MemberListPage()
-        {
-            BackgroundImage = "backImage";
-            BindingContext = new MemberViewModel();
-            var list = new ListView() { BackgroundColor = Color.Transparent };
-            list.ItemTemplate = new DataTemplate(typeof(MemberCell));
-            list.ItemsSource = ViewModel.Items;
-            list.ItemSelected += list_ItemSelected;
-            Content = list;
-        }
+		#endregion
 
-        void list_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            ViewModel.SelectedItem = e.SelectedItem as MemberInfo;
-        }
+		#region Constructor
 
-        #endregion
-    }
+		public MemberListPage()
+		{
+			BackgroundImage = "backImage.png";
+			BindingContext = new MemberViewModel();
+			var list = new ListView() { BackgroundColor = Color.Red };
+			list.ItemTemplate = new DataTemplate(typeof(MemberCell));
+			list.ItemsSource = ViewModel.Items;
+			list.ItemSelected += list_ItemSelected;
+			Content = list;
+		}
+
+		void list_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			ViewModel.SelectedItem = e.SelectedItem as MemberInfo;
+		}
+
+		#endregion
+	}
 }
