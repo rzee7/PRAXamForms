@@ -8,97 +8,101 @@ using Xamarin.Forms;
 
 namespace PRAXamForms
 {
-    public class LoginPage : ContentPage
-    {
+	public class LoginPage : ContentPage
+	{
 
-        #region View Model
+		#region View Model
 
-        public LoginViewModel ViewModel { get; set; }
+		public LoginViewModel ViewModel { get; set; }
 
-        #endregion
+		#endregion
 
-        #region Constructor
+		#region Constructor
 
-        public LoginPage()
-        {
+		public LoginPage()
+		{
 
-            #region Binding Context
+			#region Binding Context
 
-            ViewModel = new LoginViewModel();
+			ViewModel = new LoginViewModel();
 
-            BindingContext = ViewModel.UserModel;
+			BindingContext = ViewModel.UserModel;
 
-            #endregion
+			#endregion
 
-            #region Set Few Properties on the Page
+			//BackgroundImage = "backImage.png";
 
-            Padding = new Thickness(20);
-            Title = "Login";
+			BackgroundColor = Color.Red;
 
-            #endregion
+			#region Set Few Properties on the Page
 
-            #region Using Triggers
+			Padding = new Thickness(20);
+			Title = "Login";
 
-            var emailValTrig = new EventTrigger();
-            emailValTrig.Event = "TextChanged";
-            emailValTrig.Actions.Add(new EmailValidationTrigger());
+			#endregion
 
-            //Password
-            var passwordValTrig = new EventTrigger();
-            passwordValTrig.Event = "TextChanged";
-            passwordValTrig.Actions.Add(new EmptyTextValidation());
+			#region Using Triggers
 
-            #endregion
+			var emailValTrig = new EventTrigger();
+			emailValTrig.Event = "TextChanged";
+			emailValTrig.Actions.Add(new EmailValidationTrigger());
 
-            #region Create some Entry controls to capture username and password.
+			//Password
+			var passwordValTrig = new EventTrigger();
+			passwordValTrig.Event = "TextChanged";
+			passwordValTrig.Actions.Add(new EmptyTextValidation());
 
-            Entry loginInput = new Entry { Placeholder = "User Name" };
-            loginInput.SetBinding(Entry.TextProperty, "UserName");
-            loginInput.Triggers.Add(emailValTrig);
+			#endregion
 
-            Entry passwordInput = new Entry { IsPassword = true, Placeholder = "Password" };
-            passwordInput.SetBinding(Entry.TextProperty, "Password");
-            passwordInput.Triggers.Add(passwordValTrig);
+			#region Create some Entry controls to capture username and password.
 
-            #endregion
+			Entry loginInput = new Entry { Placeholder = "User Name" };
+			loginInput.SetBinding(Entry.TextProperty, "UserName");
+			loginInput.Triggers.Add(emailValTrig);
 
-            #region Create a button to login with
+			Entry passwordInput = new Entry { IsPassword = true, Placeholder = "Password" };
+			passwordInput.SetBinding(Entry.TextProperty, "Password");
+			passwordInput.Triggers.Add(passwordValTrig);
 
-            Button loginButton = new Button
-            {
-                Text = "Login",
-                BorderRadius = 5,
-                TextColor = Color.White,
-                BackgroundColor = Color.Gray,
-                Command = ViewModel.SelectionChangedCommand
-            };
-           // loginButton.SetBinding(BackgroundColorProperty, new Binding("LoginButtonColour"));
+			#endregion
 
-            var dataTrigger = new DataTrigger(typeof(Button));
-            dataTrigger.Binding = new Binding("Text.Length", BindingMode.Default, source: loginInput);
-            dataTrigger.Value = 0;
-            dataTrigger.Setters.Add(new Setter { Property = Button.IsEnabledProperty, Value = false });
-            loginButton.Triggers.Add(dataTrigger);
+			#region Create a button to login with
 
-            #endregion
+			Button loginButton = new Button
+			{
+				Text = "Login",
+				BorderRadius = 5,
+				TextColor = Color.White,
+				BackgroundColor = Color.Gray,
+				Command = ViewModel.SelectionChangedCommand
+			};
+			// loginButton.SetBinding(BackgroundColorProperty, new Binding("LoginButtonColour"));
 
-            #region Adding Controls to Stack Layout
+			var dataTrigger = new DataTrigger(typeof(Button));
+			dataTrigger.Binding = new Binding("Text.Length", BindingMode.Default, source: loginInput);
+			dataTrigger.Value = 0;
+			dataTrigger.Setters.Add(new Setter { Property = Button.IsEnabledProperty, Value = false });
+			loginButton.Triggers.Add(dataTrigger);
 
-            Content = new StackLayout
-            {
-                VerticalOptions = LayoutOptions.Center,
-                Children =
-                          {
-                              loginInput,
-                              passwordInput,
-                              loginButton
-                          },
-                Spacing = 10,
-            };
+			#endregion
 
-            #endregion
-        }
+			#region Adding Controls to Stack Layout
 
-        #endregion
-    }
+			Content = new StackLayout
+			{
+				VerticalOptions = LayoutOptions.Center,
+				Children =
+				{
+					loginInput,
+					passwordInput,
+					loginButton
+				},
+				Spacing = 10,
+			};
+
+			#endregion
+		}
+
+		#endregion
+	}
 }

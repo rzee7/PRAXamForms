@@ -11,52 +11,59 @@ using Xamarin.Forms;
 
 namespace PRAXamForms.ViewModel
 {
-    public class LoginViewModel : BaseListViewModel<MemberInfo>
-    {
-        public LoginViewModel()
-        {
-            UserModel = new UserInfo();
+	public class LoginViewModel : BaseListViewModel<MemberInfo>
+	{
+		public LoginViewModel()
+		{
+			UserModel = new UserInfo();
 
-            SelectionChangedCommand = new Command(async () =>
-            {
-                await MemberService.PostData<Response, UserInfo>(MemberService.Login, HttpMethod.Post, UserModel).ContinueWith(t =>
-                {
-                    if (!t.IsFaulted)
-                    {
-                        Navigation.PushAsync(new ProfilePage() { BindingContext = t.Result.Members[0] }, true);
-                    }
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-            });
-        }
+			SelectionChangedCommand = new Command(async () =>
+			{
+				await MemberService.PostData<Response, UserInfo>(MemberService.Login, HttpMethod.Post, UserModel).ContinueWith(t =>
+				{
+					if (!t.IsFaulted)
+					{
+						Navigation.PushAsync(new ProfilePage() { BindingContext = t.Result.Members[0] }, false);
+					}
+				}, TaskScheduler.FromCurrentSynchronizationContext());
+			});
+		}
 
-        private UserInfo _userModel;
+		private UserInfo _userModel;
 
-        public UserInfo UserModel
-        {
-            get { return _userModel; }
-            set { _userModel = value; OnPropertyChanged("UserModel"); }
-        }
+		public UserInfo UserModel
+		{
+			get { return _userModel; }
+			set
+			{
+				_userModel = value;
+				OnPropertyChanged("UserModel");
+			}
+		}
 
-        #region Register Command
+		#region Register Command
 
-        private ICommand _registerCommand;
+		private ICommand _registerCommand;
 
-        public ICommand RegisterCommand
-        {
-            get { return _registerCommand ?? (_registerCommand = new Command(async (param) => { await ExecuteRegisterUser(); })); }
-        }
+		public ICommand RegisterCommand
+		{
+			get { return _registerCommand ?? (_registerCommand = new Command(async (param) =>
+				{
+					await ExecuteRegisterUser();
+				})); }
+		}
 
-        private async Task ExecuteRegisterUser()
-        {
-            await MemberService.PostData<int, UserInfo>(MemberService.MemberList, HttpMethod.Post, UserModel).ContinueWith(t =>
-            {
-                if (!t.IsFaulted && t.Result > 0)
-                {
-                    Navigation.PushAsync(new DashboardPage() { BindingContext = UserModel }, true);
-                }
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-        }
+		private async Task ExecuteRegisterUser()
+		{
+			await MemberService.PostData<int, UserInfo>(MemberService.MemberList, HttpMethod.Post, UserModel).ContinueWith(t =>
+			{
+				if (!t.IsFaulted && t.Result > 0)
+				{
+					Navigation.PushAsync(new DashboardPage() { BindingContext = UserModel }, true);
+				}
+			}, TaskScheduler.FromCurrentSynchronizationContext());
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }
