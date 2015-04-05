@@ -123,10 +123,5 @@ namespace PRAXamForms.Data.BLL
         }
 
         #endregion
-
-        public void GetReg()
-        {
-
-        }
     }
 }
